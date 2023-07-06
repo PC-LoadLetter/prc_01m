@@ -8,7 +8,7 @@ PACKAGE = "boto3"
 DAYS = "30"
 
 h = DocxTemplate("templates/docx_t.docx")
-PYPINFO = Path(sys.exec_prefix, 'bin/pypinfo')
+PYPINFO = Path(sys.exec_prefix, "bin/pypinfo")
 
 
 def run_pypinfo(cmd: list) -> dict:
@@ -39,21 +39,21 @@ def get_most_popular() -> dict:
     return run_pypinfo(cmd)
 
 
-#py_version = get_python_version_for(PACKAGE)
-#download_count = sum([int(i["download_count"]) for i in py_version["rows"]])
-#country = get_countries_for(PACKAGE)
-#platform = get_platforms_for(PACKAGE)
-#popular = get_most_popular()
+py_version = get_python_version_for(PACKAGE)
+download_count = sum([int(i["download_count"]) for i in py_version["rows"]])
+country = get_countries_for(PACKAGE)
+platform = get_platforms_for(PACKAGE)
+popular = get_most_popular()
 
-#h.render(
-#    context={
-#        "package": PACKAGE,
-#        "download_count": download_count,
-#        "python_version": py_version,
-#        "country": country,
-#        "platforms": platform,
-#        "duration": DAYS,
-#        "popular": popular,
-#    }
-#)
-#h.save(filename="output_file.docx")
+h.render(
+    context={
+        "package": PACKAGE,
+        "download_count": download_count,
+        "python_version": py_version,
+        "country": country,
+        "platforms": platform,
+        "duration": DAYS,
+        "popular": popular,
+    }
+)
+h.save(filename="output_file.docx")
