@@ -1,11 +1,14 @@
 from docxtpl import DocxTemplate
+from pathlib import Path
 import json
 import subprocess
+import sys
 
 PACKAGE = "boto3"
 DAYS = "30"
 
 h = DocxTemplate("templates/docx_t.docx")
+PYPINFO = Path(sys.exec_prefix, "bin/pypinfo")
 
 
 def run_pypinfo(cmd: list) -> dict:
@@ -16,22 +19,22 @@ def run_pypinfo(cmd: list) -> dict:
 
 
 def get_python_version_for(pkg: str) -> dict:
-    cmd = ["pypinfo", "-d", DAYS, "-j", pkg, "pyversion"]
+    cmd = [PYPINFO, "-d", DAYS, "-j", pkg, "pyversion"]
     return run_pypinfo(cmd)
 
 
 def get_countries_for(pkg: str) -> dict:
-    cmd = ["pypinfo", "-d", DAYS, "-j", pkg, "country"]
+    cmd = [PYPINFO, "-d", DAYS, "-j", pkg, "country"]
     return run_pypinfo(cmd)
 
 
 def get_platforms_for(pkg: str) -> dict:
-    cmd = ["pypinfo", "-d", DAYS, "-j", pkg, "system", "distro"]
+    cmd = [PYPINFO, "-d", DAYS, "-j", pkg, "system", "distro"]
     return run_pypinfo(cmd)
 
 
 def get_most_popular() -> dict:
-    cmd = ["pypinfo", "-d", "365", "-j", "", "project"]
+    cmd = [PYPINFO, "-d", "365", "-j", "", "project"]
     print(cmd)
     return run_pypinfo(cmd)
 
